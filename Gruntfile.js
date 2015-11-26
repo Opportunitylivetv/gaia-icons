@@ -1,4 +1,8 @@
 /*global module*/
+
+var path = require('path');
+var outputDirectory = process.env.OUTPUT_DIR || __dirname;
+
 module.exports = function(grunt) {
   'use strict';
 
@@ -51,22 +55,22 @@ module.exports = function(grunt) {
     rename: {
       'css-embedded': {
         src: 'output/embedded/gaia-icons.css',
-        dest: 'gaia-icons-embedded.css',
+        dest: path.join(outputDirectory, 'gaia-icons-embedded.css'),
       },
 
       css: {
         src: 'output/files/gaia-icons.css',
-        dest: 'gaia-icons.css',
+        dest: path.join(outputDirectory, 'gaia-icons.css'),
       },
 
       fonts: {
-        src: 'output/files/fonts',
-        dest: 'fonts'
+        src: 'output/files/fonts/gaia-icons.ttf',
+        dest: path.join(outputDirectory, 'fonts', 'gaia-icons.ttf'),
       },
 
       example: {
         src: 'output/files/gaia-icons.html',
-        dest: 'index.html'
+        dest: path.join(outputDirectory, 'index.html'),
       }
     },
 
@@ -85,6 +89,6 @@ module.exports = function(grunt) {
     'webfont:files',
     'webfont:embedded',
     'rename',
-    'clean:output'
+    // 'clean:output'
   ]);
 };
